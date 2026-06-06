@@ -1,0 +1,23 @@
+{
+  "NewsValidation.sol": {
+    "__sources__": {
+      "NewsValidation.sol": {
+        "content": "// SPDX-License-Identifier: MIT\n\npragma solidity >=0.8.3;\n\ncontract NewsManager {\n    address[] public validators;\n}",
+        "file": "NewsValidation.sol"
+      }
+    }
+  },
+  "NewsManager.sol": {
+    "./NewsValidationLib.sol": "NewsValidationLib.sol",
+    "__sources__": {
+      "NewsManager.sol": {
+        "content": "// SPDX-License-Identifier: MIT\r\n\r\npragma solidity >=0.8.3;\r\n\r\nimport \"./NewsValidationLib.sol\";\r\n\r\ncontract NewsManager {\r\n\r\n    // STRUCTS\r\n    struct Validator {\r\n        uint256 accumulatedRewards;\r\n        uint256 totalVotes;\r\n        uint256 sumOfRatings;\r\n        bool isActive;\r\n    }\r\n\r\n    struct News {\r\n        address createBy;\r\n        string newsName;\r\n        uint256 deadline;\r\n        uint256 minValidations;\r\n        bool isConfirmed;\r\n        uint256 validationCount;\r\n        address[] validators;\r\n    }\r\n\r\n    // STATE VARIABLES\r\n    address public owner;\r\n    uint256 public totalDistributed;\r\n    uint256 public rewardAmount;\r\n\r\n    // MAPPINGS\r\n    mapping(address => Validator) public validators;\r\n    mapping(address => News) public newsList;\r\n    \r\n    // ARRAYS\r\n    address[] validatorsList;\r\n}",
+        "file": "NewsManager.sol"
+      },
+      "NewsValidationLib.sol": {
+        "content": "// SPDX-License-Identifier: MIT\n\npragma solidity >=0.8.3;\n\nlibrary NewsValidationLib {\n    function getValidatorsCount(address[] storage _validators) internal view returns (uint256) {\n        return _validators.length;\n    }\n\n    function isValidator(address[] storage _validators, address _target) internal view returns (bool) {\n        for (\n            uint256 i = 0; i < _validators.length; i++\n        ) {\n            if (_validators[i] == _target) return true;\n        }\n        return false;\n    }\n\n    function isNewsConfirmed(\n        uint256 validationCount,\n        uint256 minValidations,\n        bool isConfirmed\n    ) internal pure returns (bool) {\n        return validationCount >= minValidations && isConfirmed;\n    }\n}\n\n",
+        "file": "NewsValidationLib.sol"
+      }
+    }
+  }
+}
