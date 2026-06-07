@@ -4,7 +4,192 @@
 	},
 	"language": "Solidity",
 	"output": {
-		"abi": [],
+		"abi": [
+			{
+				"inputs": [],
+				"name": "AlreadyValidated",
+				"type": "error"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "available",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "required",
+						"type": "uint256"
+					}
+				],
+				"name": "InsufficientBalance",
+				"type": "error"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint8",
+						"name": "_vote",
+						"type": "uint8"
+					}
+				],
+				"name": "InvalidRating",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "NewsExpired",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "NewsNotConfirmed",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "NewsNotFound",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "OnlyOwner",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "ValidatorAlreadyExists",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "ValidatorNotActive",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "ValidatorNotFound",
+				"type": "error"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "newsList",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "createBy",
+						"type": "address"
+					},
+					{
+						"internalType": "string",
+						"name": "newsName",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "deadline",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "minValidations",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bool",
+						"name": "isConfirmed",
+						"type": "bool"
+					},
+					{
+						"internalType": "uint256",
+						"name": "validationCount",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "owner",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "rewardAmount",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "totalDistributed",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "validators",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "accumulatedRewards",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "totalVotes",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "sumOfRatings",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bool",
+						"name": "isActive",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
 		"devdoc": {
 			"kind": "dev",
 			"methods": {},
@@ -33,11 +218,19 @@
 	},
 	"sources": {
 		"NewsManager.sol": {
-			"keccak256": "0xdf222441cf0ac12a47cc0a8cc4c823a3342f3fd89d6401907b5b548f7ae1e892",
-			"license": "GPL-3.0",
+			"keccak256": "0x2ca9c016f530e9d8b946d0696e5b3b69ed370f90bca850901ec6b77e37132ebd",
+			"license": "MIT",
 			"urls": [
-				"bzz-raw://a2cec7a02d48b648bbd04948cae6ca3a3df52d954e7bf821f07208300b545f75",
-				"dweb:/ipfs/QmZhVRGtTx2He1k1Gp3eTGBVkXrbeFqcB6zvAQcvpt7sHf"
+				"bzz-raw://56d3cb859c2a1b2e9910fe284bd1ffded4019cb770369d221e29cae0c61a8a8f",
+				"dweb:/ipfs/QmPGo3yy7FzZiXKy3UDG5CgAiFWiMQwA1mofLHPnWk213C"
+			]
+		},
+		"NewsValidationLib.sol": {
+			"keccak256": "0x45712295dbc1444ea20ef2010311407a12cd95bd17eb28fb6f225f4b70b6912d",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://ff8188b37ccef4e89007506d8885651ee872edccf65b7dca14f1d137a300ea0c",
+				"dweb:/ipfs/QmXX5hT17vsk4P5u7L23SzDqoSjG66SEX269SqdzYxauDd"
 			]
 		}
 	},
