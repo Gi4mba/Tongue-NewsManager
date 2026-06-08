@@ -15,6 +15,7 @@ contract NewsManager {
     
     error NewsNotFound(address newsId);
     error NewsExpired(address newsId);
+    error DeadlineTooSoon();
     error NewsNotConfirmed(address newsId);
     error AlreadyValidated(address validator, address newsId);
     
@@ -85,7 +86,7 @@ contract NewsManager {
 
 
     // ===== CORE LOGIC =====
-
+    // ===== ADMIN FUNCTIONS =====
     function addValidator(address _validator) external onlyOwner {
         if (NewsValidationLib.isValidator(validatorsList, _validator)) {
             revert ValidatorAlreadyExists(_validator);
@@ -110,5 +111,31 @@ contract NewsManager {
         if (msg.value == 0) revert InsufficientAmount();
 
         emit RewardPoolToppedUp(msg.sender, msg.value);
+    }
+
+
+    // ===== NEWS FUNCTIONS =====
+    function addNews(
+        address _newsId,
+        string calldata _newsName,
+        uint256 _deadline
+    ) external {
+        if (_deadline <= block.timestamp)
+        revert NewsExpired(_newsId);
+
+        if (_deadline < block.timestamp + 1 days)
+        revert DeadlineTooSoon();
+
+        newsList[_newsId] = News(
+            msg.sender,
+            _newsName,
+            _deadline,
+            5,
+            false,
+            0,
+            new address[](0)
+        );
+
+        emit NewsAdded(_newsId, _newsName, _deadline);
     }
 }
