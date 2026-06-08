@@ -20,7 +20,8 @@ contract NewsManager {
     
     error InvalidRating(uint8 vote);
     
-    error InsufficientBalance(uint256 required);
+    error InsufficientAmount();
+    error InsufficientBalance();
     
 
     // ===== EVENTS =====
@@ -85,15 +86,29 @@ contract NewsManager {
 
     // ===== CORE LOGIC =====
 
-    // AddValidator
     function addValidator(address _validator) external onlyOwner {
         if (NewsValidationLib.isValidator(validatorsList, _validator)) {
             revert ValidatorAlreadyExists(_validator);
         }
 
-        validators[_validator] = Validator(0, 0, 0, true);
+        validators[_validator].isActive = true;
         validatorsList.push(_validator);
         emit ValidatorAdded(_validator);
     }
 
+    function removeValidator(address _validator) external onlyOwner {
+        if (!NewsValidationLib.isValidator(validatorsList, _validator) ||
+        !validators[_validator].isActive) {
+            revert ValidatorNotFound(_validator);
+        }
+
+        validators[_validator].isActive = false;
+        emit ValidatorRemoved(_validator);
+    }
+
+    function topUpRewardPool() external payable onlyOwner {
+        if (msg.value == 0) revert InsufficientAmount();
+
+        emit RewardPoolToppedUp(msg.sender, msg.value);
+    }
 }
